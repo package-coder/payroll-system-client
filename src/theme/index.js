@@ -42,7 +42,7 @@ theme = {
         MuiDrawer: {
             styleOverrides: {
                 paper: {
-                    backgroundColor: '#081627',
+                    backgroundColor: '#1d1f22',
                 },
             },
         },
@@ -107,6 +107,13 @@ theme = {
                 },
             },
         },
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: '#212426',
+                },
+            },
+        },
         MuiListItemButton: {
             styleOverrides: {
                 root: {
@@ -115,7 +122,7 @@ theme = {
                     },
                 },
             },
-        },
+        },  
         MuiListItemText: {
             styleOverrides: {
                 primary: {

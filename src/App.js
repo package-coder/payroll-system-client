@@ -1,9 +1,9 @@
 import './assets/App.css';
-import MainLayout from './layouts/main';
+import Routes from './routes';
 
 function App() {
   return (
-    <MainLayout />
+    <Routes />
   );
 }
 
