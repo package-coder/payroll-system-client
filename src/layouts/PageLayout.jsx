@@ -1,9 +1,9 @@
 import { memo } from "react"
-import AppBar from "./main/appbar"
+import AppBar from "./appbar"
 import { Box, Container } from '@mui/system';
 import { Outlet } from "react-router";
 
-const DefaultLayout = (props) => {
+const PageLayout = (props) => {
   const { handleDrawerToggle, title } = props
   
     return (
@@ -28,4 +28,4 @@ const DefaultLayout = (props) => {
     )
 }
 
-export default memo(DefaultLayout)
+export default memo(PageLayout)

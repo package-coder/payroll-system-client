@@ -1,17 +1,17 @@
-import { MainLayout, DefaultLayout } from "../layouts";
+import { DashboardLayout, PageLayout } from "../layouts";
 import UserPage from "../pages/User";
 
 
 const mainRoutes = {
     path: '/',
-    element: <MainLayout />,
+    element: <DashboardLayout />,
     children: [
         {
             path: '/',
-            element: <DefaultLayout title='Users'/>,
+            element: <PageLayout title='Users'/>,
             children: [
                 {
-                    path: 'user',
+                    path: 'users',
                     element: <UserPage />
                 },
             ]

@@ -17,6 +17,9 @@ const RoleField = () => {
             value={value}
             onChange={handleChange}
             input={<OutlinedInput />}
+            sx={{ 
+                mt: 1
+            }}
         >
             <MenuItem value='SUPER_ADMIN'>SUPER ADMIN</MenuItem>
             <MenuItem value='ADMIN'>ADMIN</MenuItem>

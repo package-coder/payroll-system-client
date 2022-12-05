@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import useMatchPath from '../../../hooks/useMatchPath';
+import useMatchPath from '../../hooks/useMatchPath';
 
 import Stack from '@mui/material/Stack';
 import Drawer from '@mui/material/Drawer';
@@ -65,25 +65,6 @@ export default function Navigator(props) {
               ))
           ))}
         </List>
-        {/* <List sx={{ p: 0 }}>
-          <ListItem inset sx={item}>
-            <ListItemButton disableRipple>
-              <ListItemAvatar>
-                <Avatar  />
-              </ListItemAvatar>
-              <ListItemText
-                primary='User001'
-                secondary={
-                    <Typography
-                    variant="caption"
-                  >
-                    Super Admin
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-          </ListItem>
-        </List> */}
       </Stack>
     </Drawer>
   );
