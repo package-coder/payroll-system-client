@@ -1,5 +1,4 @@
-import { MainLayout, DefaultLayout, ModuleLayout } from "../layouts";
-import CreateUserPage from "../pages/CreateUser";
+import { MainLayout, DefaultLayout } from "../layouts";
 import UserPage from "../pages/User";
 
 
@@ -15,10 +14,6 @@ const mainRoutes = {
                     path: 'user',
                     element: <UserPage />
                 },
-                {
-                    path: 'create/user',
-                    element: <CreateUserPage />
-                }
             ]
         },
 

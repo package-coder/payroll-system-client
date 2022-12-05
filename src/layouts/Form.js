@@ -3,13 +3,7 @@ import React from 'react'
 
 const Form = ({ children }) => {
   return (
-    <Box
-        sx={{
-            '& .MuiInputBase-input': {
-                bgcolor: '#f9f9f9'
-            }
-        }}
-    >
+    <Box>
         <form>
             {children}
         </form>

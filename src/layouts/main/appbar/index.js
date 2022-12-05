@@ -73,16 +73,7 @@ const AppBar = (props) => {
           </Container>
         </Toolbar>  
       </MuiAppBar>
-      <MuiAppBar component="div" position="static" elevation={0} sx={{ zIndex: 0  }}>
-        <Container>
-          <Tabs value={0} textColor="inherit">
-            <Tab label="Users" disableRipple/>
-            <Tab label="Sign-in method" disableRipple/>
-            <Tab label="Templates" disableRipple/>
-            <Tab label="Usage" disableRipple/>
-          </Tabs>
-        </Container>
-      </MuiAppBar>
+      
     </>
   )
 }

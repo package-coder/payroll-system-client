@@ -3,19 +3,17 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider as MUIThemeProvider, createTheme, StyledEngineProvider } from '@mui/material/styles';
 
 const themeOptions = {
-    palette: {
+    palette: { 
         primary: {
             light: '#63ccff',
             main: '#009be5',
             dark: '#006db3',
         },
-    },
-    typography: {
-        h5: {
-            fontWeight: 500,
-            fontSize: 26,
-            letterSpacing: 0.5,
-        },
+        secondary: {
+            light: '#f4f4f4',
+            main: '#c7c7c8',
+            dark: '#8e8f91'
+        }
     },
     shape: {
         borderRadius: 8,
@@ -34,11 +32,53 @@ const themeOptions = {
     },
 }
 
-export let theme = createTheme(themeOptions);
+export let theme = createTheme({
+    ...themeOptions,
+    typography: {
+        fontFamily: 'Inter',
+        fontWeightLight: 300,
+        fontWeightMedium: 500,
+        fontWeightRegular: 400,
+        fontWeightBold: 700,
+        h1: {
+            fontSize: 32,
+            fontWeight: 'bold'
+        },
+        button: {
+            fontSize: 14,
+            fontWeight: 'medium'
+        }
+    }
+});
 
 theme = {
     ...theme,
     components: {
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    '&:hover': {
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderWidth: '2px',
+                            borderStyle: 'solid',
+                            borderColor: theme.palette.primary.main,
+                        },
+                    },
+                    '&.Mui-focused': {
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderWidth: '2px',
+                            borderStyle: 'solid',
+                            borderColor: theme.palette.primary.main,
+                        },
+                    },
+                    '& .MuiOutlinedInput-notchedOutline': {
+                        border: 'none',  
+                    },
+                    fontSize: 14,
+                    backgroundColor: theme.palette.secondary.light
+                }
+            }
+        },
         MuiDrawer: {
             styleOverrides: {
                 paper: {
@@ -118,7 +158,7 @@ theme = {
             styleOverrides: {
                 root: {
                     '&.Mui-selected': {
-                        color: '#4fc3f7',
+                        color: theme.palette.primary.main,
                     },
                 },
             },

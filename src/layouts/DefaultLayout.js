@@ -19,12 +19,10 @@ const DefaultLayout = (props) => {
             component="main" 
             sx={{ 
               flex: 1, 
-              py: 6, 
+              py: 4, 
               px: 1
             }}>
-            <Container>
-                <Outlet />
-            </Container>
+              <Outlet />
           </Box>
         </Box>
     )

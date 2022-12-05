@@ -1,8 +1,7 @@
 import { matchPath, useLocation } from 'react-router-dom';
 
 const useMatchPath = () => {
-    const { pathname, search } = useLocation();
-    console.log(pathname)
+    const { pathname } = useLocation();
     return (path) => (path ? !!matchPath({ path, end: false }, pathname) : false);
 }
 
