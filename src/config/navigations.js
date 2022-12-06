@@ -9,14 +9,14 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
 
 
-const navConfig = [
+const navigations = [
     {
       id: 'Build',
       children: [
         {
           id: 'Users',
           icon: <PeopleIcon />,
-          path: '/user'
+          path: '/users'
         },
         { 
           id: 'Employees', 
@@ -50,4 +50,4 @@ const navConfig = [
     },
   ];
   
-export default navConfig
+export default navigations

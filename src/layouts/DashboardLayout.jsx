@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import { Outlet } from 'react-router-dom';
 
 import ThemeProvider, { theme } from '../theme'
-import navConfig from '../config/NavConfig';
+import navigations from '../config/navigations';
 import Navigator from './nav';
 import AppBar from './appbar';
 
@@ -42,7 +42,7 @@ const DashboardLayout = () => {
         >
           {isMdUp ? null : (
             <Navigator
-              navConfig={navConfig}
+              navConfig={navigations}
               PaperProps={{ style: { width: drawerWidth } }}
               variant="temporary"
               open={mobileOpen}
@@ -51,7 +51,7 @@ const DashboardLayout = () => {
           )}
 
           <Navigator
-            navConfig={navConfig}
+            navConfig={navigations}
             PaperProps={{ style: { width: drawerWidth } }}
             sx={{ display: { sm: 'block', xs: 'none' } }}
           />
