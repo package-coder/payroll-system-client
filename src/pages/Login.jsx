@@ -1,6 +1,8 @@
 import { Typography, FormControl, InputLabel, TextField, Box, Stack, Button, Avatar } from '@mui/material'
 import LeakAddIcon from '@mui/icons-material/LeakAdd';
 import React from 'react'
+import useLogin from '../features/auth/hooks/useLogin';
+import useGetUsers from '../features/user/hooks/useGetUsers';
 
 
 const textFieldStyle = {
@@ -9,7 +11,8 @@ const textFieldStyle = {
 }
 
 const LoginPage = () => {
-
+    const { users, loading, error } = useGetUsers()
+    console.log(users, loading, error)
 
   return (
     <Box sx={{ mt: 5 }}>

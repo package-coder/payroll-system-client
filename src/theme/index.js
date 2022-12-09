@@ -99,6 +99,13 @@ theme = {
                 },
             },
         },
+        MuiTableCell: {
+            styleOverrides: {
+                root: {
+                    padding: '5px 3px',
+                }
+            }
+        },
         MuiTabs: {
             styleOverrides: {
                 root: {
