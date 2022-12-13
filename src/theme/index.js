@@ -198,6 +198,29 @@ theme = {
                 },
             },
         },
+        MuiTableCell: {
+            styleOverrides: {
+                root: {
+                    borderColor: theme.palette.grey[200],
+                    padding: '16px 16px 16px 9px',
+                    '&.MuiTableCell-head': {
+                        fontSize: '0.75rem',
+                        fontWeight: 'bold',
+                        padding: '5px 16px 5px 12px',
+                        color: theme.palette.grey[600]
+                    }
+                }
+            }
+        },
+        MuiTableRow: {
+            styleOverrides: {
+                root: {
+                    '&:last-child .MuiTableCell-body': {
+                        borderBottom: 0,
+                    },
+                }
+            }
+        }
     },
 };
 

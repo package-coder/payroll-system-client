@@ -7,25 +7,27 @@ const PageLayout = (props) => {
   const { handleDrawerToggle, title } = props
   
     return (
+      <Box
+        sx={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          bgcolor: "grey.50",
+        }}
+      >
+        <AppBar onDrawerToggle={handleDrawerToggle} title={title} />
         <Box
-          sx={{ 
-            flex: 1, 
-            display: 'flex', 
-            flexDirection: 'column',
-            bgcolor: '#eaeaea'
-          }}>
-          <AppBar onDrawerToggle={handleDrawerToggle} title={title} />
-          <Box 
-            component="main" 
-            sx={{ 
-              flex: 1, 
-              py: 4, 
-              px: 1
-            }}>
-              <Outlet />
-          </Box>
+          component="main"
+          sx={{
+            flex: 1,
+            py: 4,
+            px: 1,
+          }}
+        >
+          <Outlet />
         </Box>
-    )
+      </Box>
+    );
 }
 
 export default memo(PageLayout)

@@ -22,6 +22,8 @@ const TableContainer = (props) => {
         <Card
           elevation={0}
           sx={{
+            border: 1,
+            borderColor: "grey.200",
             margin: "auto",
             overflow: "hidden",
           }}
@@ -31,56 +33,52 @@ const TableContainer = (props) => {
             color="secondary"
             elevation={0}
             sx={{
+              py: "5px",
+              px: "10px",
               borderBottomWidth: 1,
-              borderBottomColor: "divider",
+              borderBottomColor: "grey.200",
               borderBottomStyle: "solid",
               bgcolor: "transparent",
             }}
           >
-            <Toolbar>
-              <Grid container gap={2} alignItems="center">
-                <Grid item>
-                  <Tooltip title="Filter">
-                    <IconButton>
-                      <FilterIcon color="inherit" sx={{ display: "block" }} />
-                    </IconButton>
-                  </Tooltip>
-                </Grid>
-                <Grid item xs>
-                  <TextField
-                    fullWidth
-                    placeholder="Search by email address, phone number, or user UID"
-                    InputProps={{
-                      disableUnderline: true,
-                      sx: { fontSize: "default" },
-                    }}
-                    variant="standard"
-                  />
-                </Grid>
-                <Grid item>
-                  {actions}
-                  <Tooltip title="Reload">
-                    {loading ? (
-                      <CircularProgress />
-                    ) : (
-                      <IconButton>
-                        <RefreshIcon
-                          color="inherit"
-                          sx={{ display: "block" }}
-                        />
-                      </IconButton>
-                    )}
-                  </Tooltip>
-                </Grid>
+            <Grid container gap={2} alignItems="center">
+              <Grid item>
+                <Tooltip title="Filter">
+                  <IconButton>
+                    <FilterIcon color="inherit" sx={{ display: "block" }} />
+                  </IconButton>
+                </Tooltip>
               </Grid>
-            </Toolbar>
+              <Grid item xs>
+                <TextField
+                  fullWidth
+                  placeholder="Search by email address, phone number, or user UID"
+                  InputProps={{
+                    disableUnderline: true,
+                    sx: { fontSize: "default" },
+                  }}
+                  variant="standard"
+                />
+              </Grid>
+              <Grid item alignSelf="center">
+                {actions}
+                <Tooltip title="Reload">
+                  <IconButton>
+                    {loading ? (
+                      <CircularProgress size={20} />
+                    ) : (
+                      <RefreshIcon color="inherit" sx={{ display: "block" }} />
+                    )}
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            </Grid>
           </MuiAppBar>
-          {(empty || loading) && (
+          {empty || loading ? (
             <Typography sx={{ my: 5 }} color="text.secondary" align="center">
               No data for this module yet
             </Typography>
-          )}
-          {!(empty && loading) && (
+          ) : (
             <MuiTableContainer>{children}</MuiTableContainer>
           )}
         </Card>

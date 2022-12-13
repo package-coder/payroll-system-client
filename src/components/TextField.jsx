@@ -49,7 +49,7 @@ const TextField = (props) => {
 
 TextField.propTypes = {
   name: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   rules: PropTypes.any,
   formProps: PropTypes.any,
   controllerProps: PropTypes.any,
