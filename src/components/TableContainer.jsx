@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,9 +13,20 @@ import Card from "@mui/material/Card";
 import Pagination from "@mui/material/Pagination";
 import MuiTableContainer from "@mui/material/TableContainer";
 import CircularProgress from "@mui/material/CircularProgress";
+import { CardHeader } from "@mui/material";
 
 const TableContainer = (props) => {
-  const { actions, empty, children, loading } = props;
+  const { 
+    title,
+    actions, 
+    empty, 
+    children, 
+    loading, 
+    onReload, 
+    error,
+    disableFilter,
+    disablePaginate
+  } = props;
 
   return (
     <Grid container direction="column" gap={3} alignItems="stretch">
@@ -23,11 +35,12 @@ const TableContainer = (props) => {
           elevation={0}
           sx={{
             border: 1,
-            borderColor: "grey.200",
+            borderColor: "grey.300",
             margin: "auto",
             overflow: "hidden",
           }}
         >
+          {title && (<CardHeader title={title}/>)}
           <MuiAppBar
             position="static"
             color="secondary"
@@ -42,17 +55,21 @@ const TableContainer = (props) => {
             }}
           >
             <Grid container gap={2} alignItems="center">
-              <Grid item>
-                <Tooltip title="Filter">
-                  <IconButton>
-                    <FilterIcon color="inherit" sx={{ display: "block" }} />
-                  </IconButton>
-                </Tooltip>
-              </Grid>
+              {
+                !disableFilter && (
+                  <Grid item>
+                    <Tooltip title="Filter">
+                      <IconButton>
+                        <FilterIcon color="inherit" sx={{ display: "block" }} />
+                      </IconButton>
+                    </Tooltip>
+                </Grid>
+                )
+              }
               <Grid item xs>
                 <TextField
                   fullWidth
-                  placeholder="Search by email address, phone number, or user UID"
+                  placeholder="Search by name, email address, or user ID"
                   InputProps={{
                     disableUnderline: true,
                     sx: { fontSize: "default" },
@@ -63,7 +80,7 @@ const TableContainer = (props) => {
               <Grid item alignSelf="center">
                 {actions}
                 <Tooltip title="Reload">
-                  <IconButton>
+                  <IconButton onClick={onReload}>
                     {loading ? (
                       <CircularProgress size={20} />
                     ) : (
@@ -74,8 +91,13 @@ const TableContainer = (props) => {
               </Grid>
             </Grid>
           </MuiAppBar>
-          {empty || loading ? (
+          {error ? (
             <Typography sx={{ my: 5 }} color="text.secondary" align="center">
+              {error}
+            </Typography>
+          ) :
+            empty || loading ? (
+            <Typography sx={{ my: 5 }} color="text.primary" align="center">
               No data for this module yet
             </Typography>
           ) : (
@@ -83,11 +105,22 @@ const TableContainer = (props) => {
           )}
         </Card>
       </Grid>
-      <Grid item xs sx={{ alignSelf: "center" }}>
-        <Pagination count={10} color="primary" disabled={empty} />
-      </Grid>
+      {
+        !disablePaginate && (
+          <Grid item xs sx={{ alignSelf: "center" }}>
+            <Pagination count={10} color="primary" disabled={empty || error} />
+          </Grid>
+        )
+      }
     </Grid>
   );
 };
+
+TableContainer.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  onReload: PropTypes.func,
+  actions: PropTypes.element
+}
 
 export default TableContainer;

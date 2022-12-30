@@ -57,7 +57,7 @@ const AppBar = (props) => {
       <MuiAppBar
         component="div"
         color="primary"
-        position="static"
+        position="sticky"
         elevation={0}
         sx={{ zIndex: 0 }}
       >
@@ -73,7 +73,6 @@ const AppBar = (props) => {
           </Container>
         </Toolbar>  
       </MuiAppBar>
-      
     </>
   )
 }

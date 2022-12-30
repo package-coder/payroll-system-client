@@ -4,10 +4,8 @@ import PermMediaOutlinedIcon from '@mui/icons-material/PhotoSizeSelectActual';
 import PublicIcon from '@mui/icons-material/Public';
 import SettingsEthernetIcon from '@mui/icons-material/SettingsEthernet';
 import SettingsInputComponentIcon from '@mui/icons-material/SettingsInputComponent';
-import TimerIcon from '@mui/icons-material/Timer';
-import SettingsIcon from '@mui/icons-material/Settings';
-import PhonelinkSetupIcon from '@mui/icons-material/PhonelinkSetup';
-
+import StairsIcon from '@mui/icons-material/Stairs';
+import Diversity3Icon from '@mui/icons-material/Diversity3';
 
 const navigations = [
     {
@@ -20,34 +18,41 @@ const navigations = [
         },
         { 
           id: 'Employees', 
-          icon: <DnsRoundedIcon /> 
+          icon: <DnsRoundedIcon />,
+          path: '/employees'
         },
         { 
-          id: 'Storage', 
-          icon: <PermMediaOutlinedIcon /> 
-        },
-        { 
-          id: 'Hosting', 
-          icon: <PublicIcon /> 
-        },
-        {
-          id: 'Functions', 
-          icon: <SettingsEthernetIcon />
-        },
-        {
-          id: 'Machine learning',
+          id: 'Jobs', 
           icon: <SettingsInputComponentIcon />,
+          path: '/jobs'
         },
+        { 
+          id: 'Departments', 
+          icon: <Diversity3Icon />,
+          path: '/departments'
+        },
+        // { 
+        //   id: 'Hosting', 
+        //   icon: <PublicIcon /> 
+        // },
+        // {
+        //   id: 'Functions', 
+        //   icon: <SettingsEthernetIcon />
+        // },
+        // {
+        //   id: 'Machine learning',
+        //   icon: <SettingsInputComponentIcon />,
+        // },
       ],
     },
-    {
-      id: 'Quality',
-      children: [
-        { id: 'Analytics', icon: <SettingsIcon /> },
-        { id: 'Performance', icon: <TimerIcon /> },
-        { id: 'Test Lab', icon: <PhonelinkSetupIcon /> },
-      ],
-    },
+    // {
+    //   id: 'Quality',
+    //   children: [
+    //     { id: 'Analytics', icon: <SettingsIcon /> },
+    //     { id: 'Performance', icon: <TimerIcon /> },
+    //     { id: 'Test Lab', icon: <PhonelinkSetupIcon /> },
+    //   ],
+    // },
   ];
   
 export default navigations

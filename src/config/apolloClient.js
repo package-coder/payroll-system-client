@@ -18,7 +18,10 @@ const errorLink = onError(({ graphqlErrors, networkError }) => {
 
 const link = from([
     errorLink,
-    new HttpLink({ uri: constants.APOLLO_CLIENT_URL }),
+    new HttpLink({ 
+        uri: constants.APOLLO_CLIENT_URL, 
+        credentials: 'include'
+    }),
 ]);
   
 

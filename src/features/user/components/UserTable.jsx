@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Stack, Switch, Typography } from "@mui/material";
+import { Avatar, Chip, Stack, Switch, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -10,36 +10,43 @@ import TableContainer from "../../../components/TableContainer";
 import useGetUsers from "../hooks/useGetUsers";
 import _ from "lodash";
 import { Box } from "@mui/system";
+import TableGrid from "../../../components/TableGrid";
+import { NetworkStatus } from "@apollo/client";
+import UserModal from "./UserModal";
 
 const columns = [
   {
     id: "name",
-    label: "Name",
-    render: (row) => {
+    label: "Users",
+    render: (value, row) => {
       return (
         <div>
-          <Stack direction="row" spacing={3} alignItems="center">
+          <Stack direction="row" spacing={2} alignItems="center">
             <Switch defaultChecked={true} size="small" />
-            <Stack direction="row" spacing={2} alignItems="center">
-              <Avatar
+            <Avatar
                 sx={{
                   border: 1,
                   backgroundColor: "transparent",
-                  borderColor: "grey.400",
-                  color: "grey.400",
+                  borderColor: "grey.500",
+                  color: "grey.500",
                   fontSize: 13,
                 }}
               >
-                {_.startCase(row?.name)[0]}
+                {_.startCase(row?.firstName)[0]}
               </Avatar>
-              <span>{_.startCase(row?.name)}</span>
-              <Box sx={{ color: "grey.500", fontSize: 12 }}>#{row?.role}</Box>
-            </Stack>
+              <Typography>{_.startCase(`${row?.firstName} ${row?.lastName}`)}</Typography>
+              {/* <Box sx={{ color: "grey.500", fontSize: 12 }}>#{row?.role}</Box> */}
           </Stack>
         </div>
       );
     },
   },
+  // {
+  //   id: 'role',
+  //   label: 'Role',
+  //   align: 'center',
+  //   render: (value) => (<Chip variant="small" label={value}/>)
+  // },
   {
     id: "email",
     label: "Email",
@@ -51,64 +58,23 @@ const UserTable = (props) => {
   const { action, actionOnClick } = props;
   const {
     users,
-    queryResult: { loading },
+    queryResult: { loading, error, refetch, networkStatus },
   } = useGetUsers();
 
   return (
     <TableContainer
-      empty={!users}
-      loading={loading && !users}
-      actions={
-        !action && (
-          <Button variant="contained" sx={{ mr: 1 }} onClick={actionOnClick}>
-            Add user
-          </Button>
-        )
-      }
+      loading={loading || NetworkStatus.refetch == networkStatus}
+      actions={<UserModal />}
+      empty={users && users.length == 0}
+      onReload={() => refetch()}
+      error={error?.message}
     >
-      <Table>
-        <TableHead>
-          <TableRow>
-            {columns.map((column) => (
-              <TableCell key={column.id} align={column.align}>
-                {column.label}
-              </TableCell>
-            ))}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users
-            ?.map(({ firstName, lastName, ...others }) => ({
-              name: `${firstName} ${lastName}`,
-              ...others,
-            }))
-            ?.map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell
-                        key={column.id}
-                        align={column.align}
-                        padding={column.padding}
-                        sx={{ width: column.width }}
-                      >
-                        {column?.render
-                          ? column?.render(row)
-                          : column?.format && typeof value === "number"
-                          ? column.format(value)
-                          : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-        </TableBody>
-      </Table>
+      <TableGrid
+        data={users}
+        columns={columns}
+      />
     </TableContainer>
-  );
+  )
 };
 
 export default UserTable;

@@ -54,6 +54,14 @@ export let theme = createTheme({
 theme = {
     ...theme,
     components: {
+        MuiButton: {
+            styleOverrides: {
+                containedPrimary: {
+                    backgroundColor: '#1d1f22',
+                    color: theme.palette.primary.main
+                }
+            }
+        },
         MuiOutlinedInput: {
             styleOverrides: {
                 root: {
@@ -71,8 +79,17 @@ theme = {
                             borderColor: theme.palette.primary.main,
                         },
                     },
+                    '&.Mui-error': {
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderWidth: '2px',
+                            borderStyle: 'solid',
+                            borderColor: theme.palette.error.light,
+                        },
+                    },
                     '& .MuiOutlinedInput-notchedOutline': {
-                        border: 'none',  
+                        borderWidth: '2px',
+                        borderColor: 'transparent',
+                        borderStyle: 'solid'
                     },
                     fontSize: 14,
                     backgroundColor: theme.palette.secondary.light
@@ -201,13 +218,14 @@ theme = {
         MuiTableCell: {
             styleOverrides: {
                 root: {
+                    border: 0,
                     borderColor: theme.palette.grey[200],
                     padding: '16px 16px 16px 9px',
                     '&.MuiTableCell-head': {
                         fontSize: '0.75rem',
                         fontWeight: 'bold',
-                        padding: '5px 16px 5px 12px',
-                        color: theme.palette.grey[600]
+                        padding: '3px 16px 3px 12px',
+                        color: theme.palette.grey[600],
                     }
                 }
             }
@@ -215,9 +233,62 @@ theme = {
         MuiTableRow: {
             styleOverrides: {
                 root: {
+                    cursor: 'pointer',
                     '&:last-child .MuiTableCell-body': {
                         borderBottom: 0,
                     },
+                }
+            }
+        },
+        MuiDialogTitle: {
+            styleOverrides: {
+                root: {
+                    textAlign: 'center',
+                    fontWeight: 'bold',
+                    borderBottomWidth: '1px',
+                    borderBottomStyle: 'solid',                    
+                    borderBottomColor: theme.palette.grey[200],
+                    padding: '12px 16px',
+                    marginBottom: '16px'
+                }
+            }
+        },
+        MuiDialogContent: {
+            styleOverrides: {
+                root: {
+                    padding: '16px'
+                }
+            }
+        },
+        MuiDialogActions: {
+            styleOverrides: {
+                root: {
+                    padding: 0
+                }
+            }
+        },
+        MuiCard: {
+            styleOverrides: {
+                root: {
+                    color: 'black',
+                    borderWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: theme.palette.grey[300],
+                    boxShadow: 'none'
+                }
+            }
+        },
+        MuiCardHeader: {
+            styleOverrides: {
+                title: {
+                    fontSize: '1.25rem'
+                }
+            }
+        },
+        MuiAutocomplete: {
+            styleOverrides: {
+                inputRoot: {
+                    minWidth: '218px'
                 }
             }
         }

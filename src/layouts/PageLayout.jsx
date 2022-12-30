@@ -12,7 +12,6 @@ const PageLayout = (props) => {
           flex: 1,
           display: "flex",
           flexDirection: "column",
-          bgcolor: "grey.50",
         }}
       >
         <AppBar onDrawerToggle={handleDrawerToggle} title={title} />

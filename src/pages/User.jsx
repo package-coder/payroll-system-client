@@ -8,6 +8,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 import { useTheme } from "@mui/material/styles";
 import UserTable from "../features/user/components/UserTable";
+import { useNavigate } from 'react-router';
 
 const UserPage = () => {
   const theme = useTheme();
@@ -16,11 +17,13 @@ const UserPage = () => {
   const [modal, setModal] = React.useState(false);
   const toggleModal = () => setModal((modal) => !modal);
 
+  const navigate = useNavigate()
+
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth='md'>
       <Grid
         container
-        gap={3}
+        gap={2}
         direction={isMdUp ? "row" : "column"}
         sx={{ gridAutoFlow: "row" }}
       >
@@ -30,7 +33,9 @@ const UserPage = () => {
               elevation={0}
               sx={{
                 overflow: "hidden",
-                p: 5,
+                border: 1,
+                borderColor: "grey.300",
+                p: 4,
               }}
             >
               <UserForm onSubmit={toggleModal} onCancel={toggleModal} />

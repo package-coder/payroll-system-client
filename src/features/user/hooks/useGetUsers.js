@@ -13,7 +13,11 @@ const GET_USERS_QUERY = gql`
 `
 
 const useGetUsers = () => {
-  const { data, ...queryResult } = useQuery(GET_USERS_QUERY)
+  const { data, ...queryResult } = useQuery(GET_USERS_QUERY, {
+    notifyOnNetworkStatusChange: true
+  })
+  
+
   return { 
         users: data?.users,
         queryResult

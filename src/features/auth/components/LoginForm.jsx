@@ -41,7 +41,7 @@ const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Stack direction="column" spacing={1} sx={{ width: "100%" }}>
           <TextField
             size="small"

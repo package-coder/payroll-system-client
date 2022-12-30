@@ -9,7 +9,15 @@ import {
 import { Controller } from "react-hook-form";
 
 const TextField = (props) => {
-  const { name, label, rules, formProps, controllerProps, ...others } = props;
+  const { 
+    name, 
+    label, 
+    rules, 
+    formProps, 
+    controllerProps, 
+    fullWidth,
+    ...others 
+  } = props;
 
   return (
     <Controller
@@ -21,10 +29,9 @@ const TextField = (props) => {
         fieldState: { error },
       }) => (
         <FormControl
-          fullWidth
+          fullWidth={fullWidth}
           variant="standard"
           {...formProps}
-          required={rules?.required}
           error={error}
         >
           <InputLabel shrink htmlFor={`${name}-input`}>
@@ -32,13 +39,14 @@ const TextField = (props) => {
           </InputLabel>
           <MuiTextField
             size="small"
-            sx={{ mt: 2 }}
+            sx={{ mt: label ? 2 : 0 }}
             required={rules?.required}
             {...others}
             id={`${name}-input`}
             value={value}
             onChange={onChange}
             onBlur={onBlur}
+            error={error}
           />
           {error && <FormHelperText>{error.message}</FormHelperText>}
         </FormControl>
@@ -54,5 +62,9 @@ TextField.propTypes = {
   formProps: PropTypes.any,
   controllerProps: PropTypes.any,
 };
+
+TextField.defaultProps = {
+  fullWidth: true
+}
 
 export default TextField;

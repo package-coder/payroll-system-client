@@ -12,11 +12,11 @@ const UserForm = (props) => {
     createUser,
     queryResult: { loading, error },
   } = useCreateUser();
-  const methods = useForm();
 
+  const methods = useForm();
   const { handleSubmit } = methods;
 
-  const _onSubmit = async (data) => {
+  const handleFormSubmit = async (data) => {
     try {
       await createUser(data);
       onSubmit && onSubmit();
@@ -25,14 +25,10 @@ const UserForm = (props) => {
     }
   };
 
-  console.log(error, loading);
 
   return (
     <FormProvider {...methods}>
-      <form noValidate onSubmit={handleSubmit(_onSubmit)}>
-        <Typography variant="h6" fontWeight="fontWeightBold" sx={{ mb: 2 }}>
-          Add User Manually
-        </Typography>
+      <form noValidate onSubmit={handleSubmit(handleFormSubmit)}>
         <Stack spacing={2} alignItems="start">
           <Stack direction="row" spacing={2} sx={{ width: "100%" }}>
             <TextField
@@ -66,33 +62,15 @@ const UserForm = (props) => {
             )}
           />
         </Stack>
-        <Stack
-          direction="row"
-          alignItems="center"
-          justifyContent="center"
-          spacing={2}
-          sx={{
-            minWidth: "100%",
-            mt: 4,
-          }}
+        <Button
+          fullWidth
+          type="submit"
+          variant="contained"
+          disabled={loading}
+          sx={{ mt: 3 }}
         >
-          <Button
-            fullWidth
-            color="secondary"
-            variant="contained"
-            onClick={onCancel && onCancel}
-          >
-            Cancel
-          </Button>
-          <Button
-            fullWidth
-            type="submit"
-            variant="contained"
-            disabled={loading}
-          >
-            {loading ? "Loading.." : "Create User"}
-          </Button>
-        </Stack>
+          {loading ? "Loading.." : "Create"}
+        </Button>
       </form>
     </FormProvider>
   );
