@@ -67,6 +67,7 @@ const JobTable = () => {
       <TableGrid
         data={jobs}
         columns={columns}
+        onRowClick={(row) => navigate(`/jobs/${row._id}`)}
       />
     </TableContainer>
   )

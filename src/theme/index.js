@@ -285,6 +285,16 @@ theme = {
                 }
             }
         },
+        MuiCardActions: {
+            styleOverrides: {
+                root: {
+                    borderWidth: 0,
+                    borderTopWidth: '1px',
+                    borderStyle: 'solid',
+                    borderColor: theme.palette.divider,
+                }
+            }
+        },
         MuiAutocomplete: {
             styleOverrides: {
                 inputRoot: {

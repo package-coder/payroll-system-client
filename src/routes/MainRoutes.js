@@ -4,6 +4,7 @@ import CreateJobPage from "../pages/CreateJob";
 import DepartmentPage from "../pages/Department";
 import EmploymentTypePage from "../pages/EmploymentType";
 import JobPage from "../pages/Job";
+import JobItemPage from "../pages/JobItem";
 import JobSettingPage from "../pages/JobSetting";
 import PositionPage from "../pages/Position";
 import UserPage from "../pages/User";
@@ -38,6 +39,10 @@ const mainRoutes = {
                                 {
                                     path: 'create',
                                     element: <CreateJobPage />
+                                }, 
+                                {
+                                    path: ':id',
+                                    element: <JobItemPage />
                                 }
                             ]
                         },
