@@ -4,6 +4,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useLazyGetDepartments } from '../hooks/useGetDepartments';
 
+const getEnabledDepartments = (departments) => {
+  if(!departments) return []
+
+  return departments.filter(departments => departments.enabled)
+}
 
 const DepartmentsAutoComplete = (props) => {
     const { 
@@ -25,8 +30,8 @@ const DepartmentsAutoComplete = (props) => {
   
       (async () => {  
         if (active) {
-          const employmentTypes = await getDepartments()
-          setOptions(employmentTypes);
+          const departments = await getDepartments()
+          setOptions(getEnabledDepartments(departments));
         }
       })();
   

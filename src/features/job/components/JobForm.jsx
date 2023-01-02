@@ -1,4 +1,4 @@
-import { Box, Button, Stack, InputLabel } from '@mui/material';
+import { Box, Button, Stack, InputLabel, CircularProgress } from '@mui/material';
 import React from 'react'
 import { useForm, FormProvider, Controller } from 'react-hook-form'
 import TableGrid from '../../../components/TableGrid';
@@ -9,14 +9,7 @@ import EmploymentTypesAutoComplete from './EmploymentTypesAutoComplete';
 import PositionsAutoComplete from './PositionsAutoComplete';
 
 const columns = [
-    { 
-        id: 'label',
-        render: (value) => (
-            <InputLabel shrink>
-                {value}
-            </InputLabel>
-        )
-    },
+    {  id: 'label' },
     { 
         id: 'field',
         render: (value) => (
@@ -118,9 +111,17 @@ const data = [
 const JobForm = (props) => {
     const { onSubmit, onCancel } = props;
     
-    const { createJob } = useCreateJob()
+    const { 
+        createJob,
+        queryResult: {
+            loading
+        }
+    } = useCreateJob()
     const methods = useForm();
-    const { handleSubmit, watch } = methods;
+    const { 
+        handleSubmit, 
+        formState: { isSubmitting }
+    } = methods;
 
     const handleFormSubmit = async (data) => {
         const job = {
@@ -156,7 +157,13 @@ const JobForm = (props) => {
                 spacing={2}
             >
                 <Button variant='text'>Cancel</Button>
-                <Button variant='contained' type='submit'>Submit</Button>
+                <Button 
+                    disabled={loading}
+                    variant='contained' 
+                    type='submit'
+                >
+                    {loading ? 'Loading...' : 'Submit'}
+                </Button>
             </Stack>
         </form>
     </FormProvider>

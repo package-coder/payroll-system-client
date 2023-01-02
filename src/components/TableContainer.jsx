@@ -108,7 +108,7 @@ const TableContainer = (props) => {
       {
         !disablePaginate && (
           <Grid item xs sx={{ alignSelf: "center" }}>
-            <Pagination count={10} color="primary" disabled={empty || error} />
+            <Pagination count={10} color="primary" disabled={empty || error || loading} />
           </Grid>
         )
       }

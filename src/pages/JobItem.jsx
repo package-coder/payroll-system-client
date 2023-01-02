@@ -1,4 +1,4 @@
-import { Box, Button, Stack, InputLabel, Card, Container, CardContent, Typography, CardHeader } from '@mui/material';
+import { Box, Button, Stack, InputLabel, Card, Container, CardContent, Typography, CardHeader, CircularProgress } from '@mui/material';
 import React from 'react'
 import _ from 'lodash';
 import { useForm, FormProvider, Controller } from 'react-hook-form'
@@ -42,7 +42,13 @@ const JobItemPage = () => {
     const { id } = useParams()
     const { job, queryResult: { loading } } = useGetJob(id)
 
-    if(loading && !job) return 'loading...'
+    if(loading){
+        return (
+            <Stack alignItems='center'>
+                <CircularProgress size={20}/>
+            </Stack>
+        )
+    }
 
     const columns = ['salary', 'department', 'employmentType', 'position']
     const jobByColumn = getJobByColumn(job, columns)

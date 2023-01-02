@@ -2,20 +2,22 @@ import { NetworkStatus } from '@apollo/client'
 import { Stack, Switch, Typography } from '@mui/material'
 import React from 'react'
 import TableContainer from '../../../components/TableContainer'
+import TableGrid from '../../../components/TableGrid'
 import useGetDepartments from '../hooks/useGetDepartments'
-import DepartmentGrid from './DepartmentGrid'
 import DepartmentModal from './DepartmentModal'
+import DepartmentSwitch from './DepartmentSwitch'
+
 
 const columns = [
     {
-      id: "",
-      label: "Name",
-      render: (value, row) => (
-        <Stack direction='row' spacing={2}>
-            <Switch defaultChecked={true} size="small" />
-            <Typography>{row?.name}</Typography>
-        </Stack>
-      )
+        id: 'action',
+        padding: 'checkbox',
+        align: 'center',
+        label: 'Name',
+    },
+    {
+      id: "name",
+      render: (value) => (<Typography>{value}</Typography>)
     },
     {
 
@@ -29,6 +31,16 @@ const columns = [
     },
 ];
 
+const addActionColumnInDepartments = (departments) => {
+    if(!departments) return []
+  
+    return departments.map(department => ({
+      ...department,
+      action: <DepartmentSwitch id={department._id} value={department.enabled} />
+    }))
+  }
+
+
 const DepartmentTable = () => {
     const {
         departments,
@@ -40,15 +52,20 @@ const DepartmentTable = () => {
         }
     } = useGetDepartments()
 
+    const departmentsWithActionColumn = addActionColumnInDepartments(departments)
+
   return (
     <TableContainer
         error={error?.message}
-        loading={loading || networkStatus == NetworkStatus.refetch}
+        loading={loading}
         empty={departments && departments.length == 0}
         onReload={() => refetch()}
         actions={<DepartmentModal />}
     >
-        <DepartmentGrid departments={departments} />
+        <TableGrid
+            data={departmentsWithActionColumn}
+            columns={columns}
+        />
     </TableContainer>
   )
 }

@@ -7,6 +7,7 @@ const GET_POSITIONS_QUERY = gql`
            _id
           name
           alias
+          enabled
         }
     }
 
@@ -25,7 +26,7 @@ const useGetPositions = () => {
 
 export const useLazyGetPositions = () => {
   const [getData, queryResult] = useLazyQuery(GET_POSITIONS_QUERY, {
-      notifyOnNetworkStatusChange: true
+      notifyOnNetworkStatusChange: true,
   })
 
   const getPositions = async () => {

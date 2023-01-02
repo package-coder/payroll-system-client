@@ -6,6 +6,7 @@ const GET_DEPARTMENTS_QUERY = gql`
             _id
             name
             alias
+            enabled
         }
     }
 `

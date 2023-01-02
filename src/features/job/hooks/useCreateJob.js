@@ -27,7 +27,7 @@ const useCreateJob = () => {
             variables: {
                 job: params
             },
-            refetchQueries: 'active'
+            refetchQueries: ['GetJobs']
         })
 
         const job = data?.createJob

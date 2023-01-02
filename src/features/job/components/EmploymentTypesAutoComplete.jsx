@@ -4,6 +4,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useLazyGetEmploymentTypes } from '../hooks/useGetEmploymentTypes';
 
+const getEnabledEmploymentTypes = (employmentTypes) => {
+  if(!employmentTypes) return []
+
+  return employmentTypes.filter(type => type.enabled)
+}
 
 const EmploymentTypesAutoComplete = (props) => {
     const { 
@@ -26,7 +31,7 @@ const EmploymentTypesAutoComplete = (props) => {
       (async () => {  
         if (active) {
           const employmentTypes = await getEmploymentTypes()
-          setOptions(employmentTypes);
+          setOptions(getEnabledEmploymentTypes(employmentTypes));
         }
       })();
   

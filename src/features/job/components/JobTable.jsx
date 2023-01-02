@@ -8,14 +8,19 @@ import TableGrid from '../../../components/TableGrid'
 import useGetJobs from '../hooks/useGetJobs'
 import UserForm from '../../user/components/UserForm'
 import TableContainer from '../../../components/TableContainer';
+import JobSwitch from './JobSwitch';
 
 const columns = [
   {
+      id: 'action',
+      padding: 'checkbox',
+      align: 'center',
+      label: 'Name',
+  },
+  {
     id: "",
-    label: 'Name',
     render: (_, row) => (
       <Stack direction='row' spacing={2} alignItems='center'>
-        <Switch defaultChecked={true} size="small" />
         <Typography>{row?.name}</Typography>
         <Typography color='grey.400'>{row?.alias}</Typography>
       </Stack>
@@ -29,6 +34,15 @@ const columns = [
   }
 ]
 
+const addActionColumnInJobs = (jobs) => {
+  if(!jobs) return []
+
+  return jobs.map(job => ({
+    ...job,
+    action: <JobSwitch id={job._id} value={job.enabled} />
+  }))
+}
+
 const JobTable = () => {
 
   const navigate = useNavigate()
@@ -41,11 +55,12 @@ const JobTable = () => {
       networkStatus
     } } = useGetJobs()
 
+    const jobsWithActionColumn = addActionColumnInJobs(jobs)
   return (
     <TableContainer
       error={error?.message}
       empty={jobs && jobs.length == 0}
-      loading={loading || networkStatus == NetworkStatus.refetch}
+      loading={loading}
       onReload={() => refetch()}
       actions={
         <>
@@ -65,7 +80,7 @@ const JobTable = () => {
       }
     >
       <TableGrid
-        data={jobs}
+        data={jobsWithActionColumn}
         columns={columns}
         onRowClick={(row) => navigate(`/jobs/${row._id}`)}
       />

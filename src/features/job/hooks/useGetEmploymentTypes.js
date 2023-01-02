@@ -6,11 +6,11 @@ const GET_EMPLOYMENT_TYPES_QUERY = gql`
             alias
             name
             _id
+            enabled
         }
     }
 
 `
-
 
 const useGetEmploymentTypes = () => {
     const { data, ...queryResult } = useQuery(GET_EMPLOYMENT_TYPES_QUERY, {

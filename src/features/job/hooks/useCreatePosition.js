@@ -18,7 +18,7 @@ const useCreatePosition = () => {
             variables: {
                 position: params
             },
-            refetchQueries: 'active'
+            refetchQueries: ['GetPositions']
         })
 
         const position = data?.createPosition

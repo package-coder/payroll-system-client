@@ -19,7 +19,11 @@ const TableGrid = (props) => {
                 <TableHead>
                     <TableRow>
                         {columns.map((column) => (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell 
+                            key={column.id} 
+                            align={column.align}
+                            padding={column.padding}
+                        >
                             {column.label}
                         </TableCell>
                         ))}

@@ -91,7 +91,6 @@ theme = {
                         borderColor: 'transparent',
                         borderStyle: 'solid'
                     },
-                    fontSize: 14,
                     backgroundColor: theme.palette.secondary.light
                 }
             }
@@ -298,7 +297,7 @@ theme = {
         MuiAutocomplete: {
             styleOverrides: {
                 inputRoot: {
-                    minWidth: '218px'
+                    minWidth: '246px'
                 }
             }
         }

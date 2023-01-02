@@ -1,12 +1,13 @@
 import { gql, useQuery } from "@apollo/client"
 
 const GET_JOBS_QUERY = gql`
-    query Jobs {
+    query GetJobs {
         jobs {
             name
             alias
             _id
             salary
+            enabled
             department {
                 alias
             }

@@ -7,28 +7,33 @@ import TableGrid from '../../../components/TableGrid'
 import PositionModal from './PositionModal'
 import useGetEmploymentTypes from '../hooks/useGetEmploymentTypes';
 import EmploymentTypeModal from './EmploymentTypeModal';
+import EmploymentTypeSwitch from './EmploymentTypeSwitch';
 
 const columns = [
-    {
-      id: "",
-      render: (_, row) => (
-        <Stack direction='row' spacing={2} alignItems='center'>
-          <Typography>{row?.name}</Typography>
-          <Typography color='grey.400'>{row?.alias}</Typography>
-        </Stack>
-      )
-    },
-    {
-      id: '',
-      padding: 'none',
-      align: 'right',
-      render: () => (
-        <IconButton>
-          <DeleteIcon fontSize='small' color='grey'/>
-        </IconButton>
-      )
-    }
-  ];
+  {
+    id: "",
+    render: (_, row) => (
+      <Stack direction='row' spacing={2} alignItems='center'>
+        <Typography>{row?.name}</Typography>
+        <Typography color='grey.400'>{row?.alias}</Typography>
+      </Stack>
+    )
+  },
+  {
+    id: 'action',
+    padding: 'checkbox',
+    align: 'center',
+  }
+];
+
+const addActionColumnInEmploymentTypes = (employmentTypes) => {
+  if(!employmentTypes) return []
+
+  return employmentTypes.map(employmentType => ({
+    ...employmentType,
+    action: <EmploymentTypeSwitch id={employmentType._id} value={employmentType.enabled} />
+  }))
+}
 
 const EmploymentTypeTable = () => {
 
@@ -42,19 +47,21 @@ const EmploymentTypeTable = () => {
         }
     } = useGetEmploymentTypes()
 
+    const employmentTypesWithActionColumn = addActionColumnInEmploymentTypes(employmentTypes)
+
   return (
     <TableContainer
       disablePaginate
       disableFilter
       error={error?.message}
-      loading={loading || networkStatus == NetworkStatus.refetch}
+      loading={loading}
       onReload={() => refetch()}
       empty={employmentTypes && employmentTypes.length == 0}
       actions={<EmploymentTypeModal />}
     >
       <TableGrid
         disableHeader
-        data={employmentTypes}
+        data={employmentTypesWithActionColumn}
         columns={columns}
       />
     </TableContainer>

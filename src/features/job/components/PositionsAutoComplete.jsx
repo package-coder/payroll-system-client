@@ -4,6 +4,11 @@ import Autocomplete from '@mui/material/Autocomplete';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useLazyGetPositions } from '../hooks/useGetPositions';
 
+const getEnabledPositions = (positions) => {
+  if(!positions) return []
+
+  return positions.filter(position => position.enabled)
+}
 
 const PositionsAutoComplete = (props) => {
     const { 
@@ -26,7 +31,7 @@ const PositionsAutoComplete = (props) => {
       (async () => {  
         if (active) {
           const positions = await getPositions()
-          setOptions(positions);
+          setOptions(getEnabledPositions(positions));
         }
       })();
   

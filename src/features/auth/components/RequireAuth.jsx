@@ -5,7 +5,13 @@ import PropTypes from 'prop-types'
 
 const RequireAuth = (props) => {
     const { allowedRoles } = props
-    const { user, queryResult: { loading, error } } = useAuth()
+    const { 
+        user, 
+        queryResult: { 
+            loading, 
+            error 
+        } 
+    } = useAuth()
 
     if(loading) return 'Loading...'
     if(!user || error) 
