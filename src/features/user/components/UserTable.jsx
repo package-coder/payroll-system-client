@@ -13,16 +13,21 @@ import { Box } from "@mui/system";
 import TableGrid from "../../../components/TableGrid";
 import { NetworkStatus } from "@apollo/client";
 import UserModal from "./UserModal";
+import UserSwitch from "./UserSwitch";
 
 const columns = [
   {
+      id: 'action',
+      padding: 'checkbox',
+      align: 'center',
+      label: 'Name',
+  },
+  {
     id: "name",
-    label: "Users",
     render: (value, row) => {
       return (
         <div>
           <Stack direction="row" spacing={2} alignItems="center">
-            <Switch defaultChecked={true} size="small" />
             <Avatar
                 sx={{
                   border: 1,
@@ -54,12 +59,22 @@ const columns = [
   },
 ];
 
+const addActionColumnInUser = (users) => {
+  if(!users) return []
+
+  return users.map(user => ({
+    ...user,
+    action: <UserSwitch id={user._id} value={user.enabled} />
+  }))
+}
+
 const UserTable = (props) => {
-  const { action, actionOnClick } = props;
   const {
     users,
     queryResult: { loading, error, refetch, networkStatus },
   } = useGetUsers();
+
+  const usersWithActionColumn = addActionColumnInUser(users)
 
   return (
     <TableContainer
@@ -70,7 +85,7 @@ const UserTable = (props) => {
       error={error?.message}
     >
       <TableGrid
-        data={users}
+        data={usersWithActionColumn}
         columns={columns}
       />
     </TableContainer>

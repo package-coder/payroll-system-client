@@ -8,6 +8,7 @@ const GET_USERS_QUERY = gql`
             lastName
             firstName
             role
+            enabled
         }
     }
 `
