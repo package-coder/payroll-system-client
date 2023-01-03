@@ -8,6 +8,7 @@ import {
   Button,
   Avatar,
   CircularProgress,
+  FormHelperText,
 } from "@mui/material";
 import useLogin from "../hooks/useLogin";
 import { FormProvider, useForm } from "react-hook-form";
@@ -22,7 +23,10 @@ const textFieldStyle = {
 const LoginForm = () => {
   const {
     loginUser,
-    queryResult: { loading },
+    queryResult: { 
+      loading,
+      error
+    },
   } = useLogin();
   const navigate = useNavigate();
   const methods = useForm();
@@ -43,6 +47,12 @@ const LoginForm = () => {
     <FormProvider {...methods}>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Stack direction="column" spacing={1} sx={{ width: "100%" }}>
+        <FormHelperText 
+            sx={{ textAlign: 'center' }}
+            error
+          >
+            {error?.message || ''}
+          </FormHelperText>
           <TextField
             size="small"
             name="email"

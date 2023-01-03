@@ -25,7 +25,8 @@ const TableContainer = (props) => {
     onReload, 
     error,
     disableFilter,
-    disablePaginate
+    disablePaginate,
+    placeholder = "Search"
   } = props;
 
   return (
@@ -69,7 +70,7 @@ const TableContainer = (props) => {
               <Grid item xs>
                 <TextField
                   fullWidth
-                  placeholder="Search by name, email address, or user ID"
+                  placeholder={placeholder}
                   InputProps={{
                     disableUnderline: true,
                     sx: { fontSize: "default" },

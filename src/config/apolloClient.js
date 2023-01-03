@@ -6,13 +6,27 @@ import {
     from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
+import { useNavigate } from 'react-router';
   
-const errorLink = onError(({ graphqlErrors, networkError }) => {
+const errorLink = onError(({ graphQLErrors, networkError }) => {
 
-    if (graphqlErrors) {
-        graphqlErrors.map(({ message, location, path }) => {
-            alert(`Graphql error ${message}`);
+    if (graphQLErrors) {
+        graphQLErrors.forEach(({ message, locations, path, extensions }) => {
+            console.log(
+                `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+            )
+
+            switch(extensions.code) {
+                case "UNAUTHENTICATED":
+                    window.location.assign('/login')
+                break;
+            }
         });
+    }
+    
+
+    if (networkError) {
+        console.log(`[Network error]: ${networkError}`);
     }
 });
 
