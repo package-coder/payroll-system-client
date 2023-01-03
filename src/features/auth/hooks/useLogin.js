@@ -17,7 +17,6 @@ const useLogin = () => {
         email,
         password
       },
-      refetchQueries: 'active'
     })
 
     const user = data?.loginUser

@@ -15,6 +15,7 @@ import Typography from '@mui/material/Typography';
 import Tab from '@mui/material/Tab';
 import Tabs from '@mui/material/Tabs';
 import { Container } from '@mui/material';
+import AccountMenu from './AccountMenu';
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -46,9 +47,7 @@ const AppBar = (props) => {
                 </Tooltip>
               </Grid>
               <Grid item>
-                <IconButton color="inherit" sx={{ p: 0.5 }}>
-                  <Avatar src="/static/images/avatar/1.jpg" alt="My Avatar" />
-                </IconButton>
+                <AccountMenu />
               </Grid>
             </Grid>
           </Container>
