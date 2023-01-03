@@ -80,6 +80,14 @@ const UserTable = () => {
 
   const usersWithActionColumn = addActionColumnInUser(users)
 
+  const handleSearchChange = (value) => {
+    refetch({
+      queryOption: {
+        search: value
+      }
+    })
+  }
+
   return (
     <TableContainer
       loading={loading || NetworkStatus.refetch == networkStatus}
@@ -96,6 +104,8 @@ const UserTable = () => {
       }
       empty={users && users.length == 0}
       onReload={() => refetch()}
+      placeholder='Search by email, first, and last name'
+      onSearchChange={handleSearchChange}
       error={error?.message}
     >
       <TableGrid

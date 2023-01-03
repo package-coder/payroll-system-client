@@ -9,9 +9,17 @@ import useGetPositions from '../hooks/useGetPositions'
 import PositionModal from './PositionModal'
 import useEnablePosition from '../hooks/useEnablePosition';
 import PositionSwitch from './PositionSwitch';
+import { useState } from 'react';
+import { useCallback } from 'react';
+import useCreatePosition from '../hooks/useCreatePosition';
 
 
 const columns = [
+  {
+    id: 'action',
+    padding: 'checkbox',
+    align: 'center',
+  },
   {
     id: "",
     render: (_, row) => (
@@ -21,11 +29,12 @@ const columns = [
       </Stack>
     )
   },
-  {
-    id: 'action',
-    padding: 'checkbox',
-    align: 'center',
-  }
+  // {
+  //   id: '',
+  //   render: () => (
+
+  //   )
+  // }
 ];
 
 const addActionColumnInPositions = (positions) => {
@@ -37,7 +46,37 @@ const addActionColumnInPositions = (positions) => {
   }))
 }
 
+const AddPositionButton = (props) => {
+  const { value, onSubmit } = props
+  const { createPosition, queryResult } = useCreatePosition()
+
+  const onClick = async () => {
+    if(!value) return
+
+    try{
+      await createPosition({
+        name: value
+      })
+      onSubmit && onSubmit()
+    }catch (e) {
+      console.error(e)
+    }
+  }
+
+  return (
+    <Button 
+      variant="contained" 
+      sx={{ mr: 1 }} 
+      onClick={onClick}
+    >
+      Add position
+    </Button>
+  )
+}
+
 const PositionTable = () => {
+
+  const [inputValue, setInputValue] = useState('')
 
     const { 
         positions, 
@@ -49,6 +88,14 @@ const PositionTable = () => {
         }
     } = useGetPositions()
 
+    const handleSearchChange = (value) => {
+      setInputValue(value)
+    }
+
+    const handleSubmit = () => {
+      setInputValue('')
+    }
+
     const positionsWithActionColumn = addActionColumnInPositions(positions)
 
   return (
@@ -57,9 +104,16 @@ const PositionTable = () => {
       disableFilter
       error={error?.message}
       loading={fetchingPositions}
+      placeholder='Enter position name'
+      onSearchChange={handleSearchChange}
+      searchValue={inputValue}
       onReload={() => refetch()}
       empty={positions && positions.length == 0}
-      actions={<PositionModal />}
+      actions={
+        <AddPositionButton 
+          value={inputValue} 
+          onSubmit={handleSubmit}
+        />}
     >
       <TableGrid
         disableHeader

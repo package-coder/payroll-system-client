@@ -1,8 +1,8 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_USERS_QUERY = gql`
-    query GetUsers {
-        users {
+    query GetUsers($queryOption: QueryOption) {
+        users(queryOption: $queryOption) {
             _id
             email
             lastName

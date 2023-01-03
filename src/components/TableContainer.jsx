@@ -26,6 +26,8 @@ const TableContainer = (props) => {
     error,
     disableFilter,
     disablePaginate,
+    onSearchChange,
+    searchValue,
     placeholder = "Search"
   } = props;
 
@@ -71,6 +73,8 @@ const TableContainer = (props) => {
                 <TextField
                   fullWidth
                   placeholder={placeholder}
+                  value={searchValue}
+                  onChange={(e) => onSearchChange(e.target.value)}
                   InputProps={{
                     disableUnderline: true,
                     sx: { fontSize: "default" },
