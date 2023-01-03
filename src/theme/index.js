@@ -221,10 +221,8 @@ theme = {
                     borderColor: theme.palette.grey[200],
                     padding: '16px 16px 16px 9px',
                     '&.MuiTableCell-head': {
-                        fontSize: '0.75rem',
-                        fontWeight: 'bold',
                         padding: '3px 16px 3px 12px',
-                        color: theme.palette.grey[600],
+                        color: theme.palette.grey[400],
                     }
                 }
             }
@@ -298,6 +296,13 @@ theme = {
             styleOverrides: {
                 inputRoot: {
                     minWidth: '246px'
+                }
+            }
+        },
+        MuiSelect: {
+            styleOverrides: {
+                select: {
+                    minWidth: '202px'
                 }
             }
         }

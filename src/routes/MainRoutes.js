@@ -1,6 +1,7 @@
 import RequireAuth from "../features/auth/components/RequireAuth";
 import { DashboardLayout, PageLayout } from "../layouts";
 import CreateJobPage from "../pages/CreateJob";
+import CreateUserPage from "../pages/CreateUser";
 import DepartmentPage from "../pages/Department";
 import EmploymentTypePage from "../pages/EmploymentType";
 import JobPage from "../pages/Job";
@@ -8,6 +9,7 @@ import JobItemPage from "../pages/JobItem";
 import JobSettingPage from "../pages/JobSetting";
 import PositionPage from "../pages/Position";
 import UserPage from "../pages/User";
+import UserProfilePage from "../pages/UserProfile";
 
 
 const mainRoutes = {
@@ -24,7 +26,17 @@ const mainRoutes = {
                     children: [
                         {
                             path: 'users',
-                            element: <UserPage />
+                            element: <UserPage />,
+                            children: [
+                                {
+                                    path: 'create',
+                                    element: <CreateUserPage />
+                                },
+                                {
+                                    path: ':id',
+                                    element: <UserProfilePage />
+                                }
+                            ]
                         },
                     ]
                 },

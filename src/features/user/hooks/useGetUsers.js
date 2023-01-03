@@ -1,7 +1,7 @@
 import { useQuery, gql } from '@apollo/client'
 
 const GET_USERS_QUERY = gql`
-    query GetUser {
+    query GetUsers {
         users {
             _id
             email
@@ -20,8 +20,8 @@ const useGetUsers = () => {
   
 
   return { 
-        users: data?.users,
-        queryResult
+    users: data?.users,
+    queryResult
    }
 }
 

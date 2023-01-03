@@ -6,6 +6,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Table from "@mui/material/Table";
+import { useNavigate } from 'react-router'
 import TableContainer from "../../../components/TableContainer";
 import useGetUsers from "../hooks/useGetUsers";
 import _ from "lodash";
@@ -56,6 +57,7 @@ const columns = [
     id: "email",
     label: "Email",
     align: "right",
+    render: (value) =>  <Typography>{value}</Typography>
   },
 ];
 
@@ -68,7 +70,9 @@ const addActionColumnInUser = (users) => {
   }))
 }
 
-const UserTable = (props) => {
+const UserTable = () => {
+
+  const navigate = useNavigate()
   const {
     users,
     queryResult: { loading, error, refetch, networkStatus },
@@ -79,7 +83,17 @@ const UserTable = (props) => {
   return (
     <TableContainer
       loading={loading || NetworkStatus.refetch == networkStatus}
-      actions={<UserModal />}
+      actions={
+        <>
+          <Button 
+            variant="contained" 
+            sx={{ mr: 1 }}
+            onClick={() => navigate('/users/create')}
+          >
+            Add user
+          </Button>
+        </>
+      }
       empty={users && users.length == 0}
       onReload={() => refetch()}
       error={error?.message}
@@ -87,6 +101,7 @@ const UserTable = (props) => {
       <TableGrid
         data={usersWithActionColumn}
         columns={columns}
+        onRowClick={(row) => navigate(`/users/${row._id}`)}
       />
     </TableContainer>
   )

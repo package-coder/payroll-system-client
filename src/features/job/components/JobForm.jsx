@@ -31,7 +31,6 @@ const data = [
         field: (
             <TextField 
                 name='name'
-                placeholder='Enter name here'
                 fullWidth={false}
                 rules={{ required: true }}
             />

@@ -3,8 +3,9 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import React from 'react'
 import JobForm from '../features/job/components/JobForm'
 import { useNavigate } from 'react-router';
+import UserForm from '../features/user/components/UserForm';
 
-const CreateJobPage = () => {
+const CreateUserPage = () => {
 
    const navigate = useNavigate()
 
@@ -12,19 +13,14 @@ const CreateJobPage = () => {
     <Container maxWidth='sm'>
         <Card>
             <CardHeader 
-                title='Create' 
-                // action={
-                //     <IconButton>
-                //         <MoreVertIcon fontSize='small'/>
-                //     </IconButton>
-                // }    
+                title='Create'     
             />
             <CardContent>
-                <JobForm onSubmit={() => navigate(-1)}/>
+                <UserForm onSubmit={() => navigate(-1)}/>
             </CardContent>
         </Card>
     </Container>
   )
 }
 
-export default CreateJobPage
+export default CreateUserPage

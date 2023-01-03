@@ -19,7 +19,7 @@ const useCreateUser = () => {
             variables: {
                 user: params
             },
-            refetchQueries: 'active'
+            refetchQueries: ['GetUsers']
         })
 
         const user = data?.createUser

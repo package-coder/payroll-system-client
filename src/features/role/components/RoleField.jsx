@@ -8,10 +8,7 @@ const RoleField = (props) => {
     onChange(e.target.value);
   };
   return (
-    <FormControl required={required} fullWidth size="small">
-      <InputLabel shrink htmlFor="role-select">
-        Role
-      </InputLabel>
+    <FormControl required={required} size="small">
       <Select
         required={required}
         onBlur={onBlur}

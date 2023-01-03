@@ -6,7 +6,6 @@ import {
     from,
 } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
-import { useNavigate } from 'react-router';
   
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 
@@ -42,6 +41,11 @@ const link = from([
 const client = new ApolloClient({
     link: link,
     cache: new InMemoryCache(),
+    defaultOptions: {
+        query: {
+            fetchPolicy: 'no-cache  '
+        }
+    }
 });
 
 export default client
