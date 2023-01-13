@@ -1,20 +1,14 @@
 import React from "react";
-import { Avatar, Chip, Stack, Switch, Typography } from "@mui/material";
+import { Avatar, Stack, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Table from "@mui/material/Table";
 import { useNavigate } from 'react-router'
 import TableContainer from "../../../components/TableContainer";
 import useGetUsers from "../hooks/useGetUsers";
 import _ from "lodash";
-import { Box } from "@mui/system";
 import TableGrid from "../../../components/TableGrid";
 import { NetworkStatus } from "@apollo/client";
-import UserModal from "./UserModal";
 import UserSwitch from "./UserSwitch";
+import SplitButton from "../../../components/SplitButton";
 
 const columns = [
   {
@@ -47,16 +41,11 @@ const columns = [
       );
     },
   },
-  // {
-  //   id: 'role',
-  //   label: 'Role',
-  //   align: 'center',
-  //   render: (value) => (<Chip variant="small" label={value}/>)
-  // },
+
   {
     id: "email",
     label: "Email",
-    align: "right",
+    align: 'right',
     render: (value) =>  <Typography>{value}</Typography>
   },
 ];

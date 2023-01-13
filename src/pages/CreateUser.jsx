@@ -11,14 +11,7 @@ const CreateUserPage = () => {
 
   return (
     <Container maxWidth='sm'>
-        <Card>
-            <CardHeader 
-                title='Create'     
-            />
-            <CardContent>
-                <UserForm onSubmit={() => navigate(-1)}/>
-            </CardContent>
-        </Card>
+      <UserForm onSubmit={() => navigate(-1)}/>
     </Container>
   )
 }

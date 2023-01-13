@@ -1,4 +1,4 @@
-import { Typography, Stack, Button } from "@mui/material";
+import { Typography, Stack, Button, Card, CardContent, CardHeader, Grid, Box, CardActionArea } from "@mui/material";
 import RoleField from "../../role/components/RoleField";
 import React from "react";
 import useCreateUser from "../hooks/useCreateUser";
@@ -22,8 +22,13 @@ const columns = [
   }
 ]
 
+const imageData = [
+  {
+    label: 'Image',
+  }
+]
 
-const data = [
+const accountTableData = [
   {
       label: 'First Name',
       field: (
@@ -85,7 +90,11 @@ const data = [
 ]
 
 const UserForm = (props) => {
-  const { onSubmit, onCancel } = props;
+  const { 
+    onSubmit, 
+    onCancel,
+    renderActions
+  } = props;
 
   const {
     createUser,
@@ -108,20 +117,54 @@ const UserForm = (props) => {
   return (
     <FormProvider {...methods}>
       <form noValidate onSubmit={handleSubmit(handleFormSubmit)}>
-        <TableGrid 
-          disableHeader
-          disableHover
-          data={data}
-          columns={columns}
-        />
+        <Grid container direction='column' spacing={5}>
+          <Grid item>
+            <Card>
+              <Grid 
+                container 
+                direction='column'
+              >
+                <Grid item xs>
+                  <CardHeader title='Profile Photo' />
+                </Grid> 
+                <Grid item sx={{ alignSelf: 'center' }}>
+                  <CardContent>
+                    <Box 
+                      sx={{ 
+                        height: 130,
+                        width: 130,
+                        borderRadius: '50%',
+                        backgroundColor: 'grey.100'
+                      }}
+                    />
+                  </CardContent>
+                </Grid>
+              </Grid>
+              <CardActionArea>
+                Upload photo
+              </CardActionArea>
+            </Card>
+          </Grid>
+          <Grid item>
+            <Card>
+              <CardHeader title='Account' />
+              <CardContent>
+                <TableGrid 
+                  disableHeader
+                  disableHover
+                  data={accountTableData}
+                  columns={columns}
+                />
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
         <Stack 
           sx={{ mt: 3 }} 
           direction='row' 
           alignItems='center'
           justifyContent='end'
-          spacing={2}
         >
-          <Button variant='text'>Cancel</Button>
           <Button 
               disabled={loading}
               variant='contained' 
