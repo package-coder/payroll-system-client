@@ -1,10 +1,11 @@
 import React from 'react'
-import { Navigate, Outlet } from 'react-router'
+import { Navigate, Outlet, useLocation } from 'react-router'
 import useAuth from '../hooks/useAuth'
 import PropTypes from 'prop-types'
 
 const RequireAuth = (props) => {
     const { allowedRoles } = props
+    const location = useLocation()
     const { 
         user, 
         queryResult: { 
@@ -15,7 +16,7 @@ const RequireAuth = (props) => {
 
     if(loading) return 'Loading...'
     if(!user || error) 
-        return <Navigate to='/login' replace/>
+        return <Navigate to='/login' state={{ from: location }} replace/>
     if(allowedRoles && allowedRoles.some(allowedRole => user.role == allowedRole))
         return <Navigate to='/error/404' replace/>
     return <Outlet />

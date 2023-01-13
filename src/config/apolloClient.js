@@ -10,12 +10,12 @@ import { onError } from "@apollo/client/link/error";
 const errorLink = onError(({ graphQLErrors, networkError }) => {
 
     if (graphQLErrors) {
-        graphQLErrors.forEach(({ message, locations, path, extensions }) => {
+        graphQLErrors.forEach(({ message, locations, path, extensions, name }) => {
             console.log(
                 `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
             )
-
-            switch(extensions.code) {
+ 
+            switch(message.split('@')[0]) {
                 case "UNAUTHENTICATED":
                     window.location.assign('/login')
                 break;
@@ -43,7 +43,7 @@ const client = new ApolloClient({
     cache: new InMemoryCache(),
     defaultOptions: {
         query: {
-            fetchPolicy: 'no-cache  '
+            fetchPolicy: 'no-cache'
         }
     }
 });
