@@ -2,14 +2,15 @@ import { FormControl, Label, InputLabel, MenuItem, OutlinedInput, Select, FormLa
 import React from 'react'
 
 const RoleField = (props) => {
-  const { onChange, onBlur, required } = props;
+  const { value, onChange, onBlur, required, error } = props;
 
   const handleChange = (e) => {
     onChange(e.target.value);
   };
   return (
-    <FormControl required={required} size="small">
+    <FormControl error={error} required={required} size="small">
       <Select
+        value={value}
         required={required}
         onBlur={onBlur}
         sx={{ mt: 1 }}

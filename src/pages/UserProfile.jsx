@@ -1,12 +1,12 @@
 import React from 'react'
 import useGetUser from '../features/user/hooks/useGetUser'
-import { Box, Button, Stack, InputLabel, Card, Container, CardContent, Typography, CardHeader, CircularProgress } from '@mui/material';
+import { Box, Button, Stack, InputLabel, Card, Container, CardContent, Typography, CardHeader, CircularProgress, CardActionArea } from '@mui/material';
 import _ from 'lodash';
 import { useForm, FormProvider, Controller } from 'react-hook-form'
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import TableGrid from '../components/TableGrid';
 
-const rows = [
+const columns = [
     { 
         id: 'label',
         render: (value) => (
@@ -22,23 +22,20 @@ const rows = [
     }
 ]
 
-const getUserByColumn = (user, columns = []) => {
-    if(!user) return []
-
-    return Object.entries(user)
-        .filter(entries => columns.includes(entries[0]))
-        .map(entries => (
-            {
-                label: _.startCase(entries[0]),
-                field: entries[1]
-            }
-        ))
-}
 
 const UserProfilePage = () => {
 
+    const navigate = useNavigate()
     const { id } = useParams()
-    const { user, queryResult: { loading } } = useGetUser(id)
+    const { 
+        user, 
+        queryResult: { loading, error }
+    } = useGetUser(id)
+
+    if(error) {
+        console.log('Error: ', error.message)
+        return
+    }
 
     if(loading){
         return (
@@ -48,25 +45,40 @@ const UserProfilePage = () => {
         )
     }
 
-    const columns = ['firstName', 'lastName', 'email', 'role']
-    const userByColumn = getUserByColumn(user, columns)
+    const data = [
+        {
+            label: 'ID',
+            field: user._id,
+        },
+        {
+            label: 'Email',
+            field: user.email,
+        },
+        {
+            label: 'Role',
+            field: user.role,
+        },
+    ]
 
   return (
     <Container maxWidth='sm'>
         <Card>
             <CardHeader 
                 title={`${user?.firstName} ${user?.lastName}`}
-                action={
-                    <Button>edit</Button>
-                } 
             />
             <CardContent>
                 <TableGrid 
                     disableHover
-                    columns={rows}
-                    data={userByColumn}
+                    columns={columns}
+                    data={data}
                 />
             </CardContent>
+            <CardActionArea 
+                disableRipple
+                onClick={() => navigate(`/users/update/${id}`)}
+            >
+                Update User
+            </CardActionArea>
         </Card>
     </Container>
   )

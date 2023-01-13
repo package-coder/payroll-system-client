@@ -7,6 +7,7 @@ const CREATE_USER_QUERY = gql`
             email
             firstName
             lastName
+            role
         }
     }
 `

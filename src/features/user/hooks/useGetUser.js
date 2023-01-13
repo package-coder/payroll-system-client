@@ -20,7 +20,6 @@ const useGetUser = (id) => {
         variables: {
             id: id,
         },
-        skip: !id 
     })
 
     return {

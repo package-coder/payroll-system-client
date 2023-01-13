@@ -8,6 +8,8 @@ import JobPage from "../pages/Job";
 import JobItemPage from "../pages/JobItem";
 import JobSettingPage from "../pages/JobSetting";
 import PositionPage from "../pages/Position";
+import UpdateUserPage from "../pages/UpdateUser";
+import UpdateUserPasswordPage from "../pages/UpdateUserPassword";
 import UserPage from "../pages/User";
 import UserProfilePage from "../pages/UserProfile";
 
@@ -31,6 +33,14 @@ const mainRoutes = {
                                 {
                                     path: 'create',
                                     element: <CreateUserPage />
+                                },
+                                {
+                                    path: 'update/:id',
+                                    element: <UpdateUserPage />
+                                },
+                                {
+                                    path: 'password/update/:id',
+                                    element: <UpdateUserPasswordPage />
                                 },
                                 {
                                     path: ':id',

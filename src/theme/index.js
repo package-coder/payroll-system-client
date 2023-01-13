@@ -86,6 +86,13 @@ theme = {
                             borderColor: theme.palette.error.light,
                         },
                     },
+                    '&.Mui-disabled': {
+                        '& .MuiOutlinedInput-notchedOutline': {
+                            borderWidth: '1px',
+                            borderStyle: 'solid',
+                            backgroundColor: theme.palette.grey[50]
+                        },
+                    },
                     '& .MuiOutlinedInput-notchedOutline': {
                         borderWidth: '2px',
                         borderColor: 'transparent',
@@ -282,10 +289,12 @@ theme = {
                 }
             }
         },
-        MuiCardActions: {
+        MuiCardActionArea: {
             styleOverrides: {
                 root: {
                     borderWidth: 0,
+                    padding: '16px',
+                    color: theme.palette.primary.main,
                     borderTopWidth: '1px',
                     borderStyle: 'solid',
                     borderColor: theme.palette.divider,
@@ -303,6 +312,20 @@ theme = {
             styleOverrides: {
                 select: {
                     minWidth: '202px'
+                }
+            }
+        },
+        MuiMenuItem: {
+            styleOverrides: {
+                root: {
+                    fontSize: '14px'
+                }
+            }
+        },
+        MuiButtonGroup: {
+            styleOverrides: {
+                grouped: {
+                    minWidth: '30px'
                 }
             }
         }
