@@ -9,14 +9,15 @@ const AuthLayout = () => {
         <Box 
             sx={{
                 minHeight: '100vh',
-                backgroundColor: '#1d1f22',
+                backgroundColor: '#0e0f11',
                 color: 'white'
             }}
         >
             <Container 
                 maxWidth='xs'
                 sx={{
-                    py: 6
+                    height: '100%',
+                    py: 4
                 }}
             >
                 <Outlet />

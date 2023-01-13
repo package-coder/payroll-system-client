@@ -24,15 +24,15 @@ const textFieldStyle = {
 };
 
 const iconButtonStyle = {
-  color: 'grey'
+    color: 'grey'
 }
 
 const visibilityPasswordIcons = {
-  showIcon: <VisibilityOutlinedIcon sx={{ fontSize: 16 }}/>,
-  offIcon: <VisibilityOffOutlinedIcon sx={{ fontSize: 16 }}/>
+    showIcon: <VisibilityOutlinedIcon sx={{ fontSize: 16 }}/>,
+    offIcon: <VisibilityOffOutlinedIcon sx={{ fontSize: 16 }}/>
 }
 
-const LoginForm = () => {
+const ForgotPasswordForm = () => {
   const {
     loginUser,
     queryResult: { 
@@ -45,7 +45,6 @@ const LoginForm = () => {
 
   const { 
     handleSubmit,  
-    resetField,
     formState: {
       isValid
     }
@@ -59,15 +58,16 @@ const LoginForm = () => {
     } catch (e) {
       console.error(e);
     }
-    finally {
-      resetField({})
-    }
   };
 
   return (
     <FormProvider {...methods}>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <Stack direction="column" spacing={1} sx={{ width: "100%" }}>
+        <Stack 
+            direction="column" 
+            spacing={1} 
+            sx={{ width: "100%" }}
+        >
           {error?.message && (
             <FormHelperText 
               sx={{ textAlign: 'center' }}
@@ -76,21 +76,25 @@ const LoginForm = () => {
               {error?.message}
             </FormHelperText>
           )}
-          <TextField
-            size="small"
-            name="email"
-            placeholder="Enter email address"
-            autoComplete="current-email"
-            rules={{
-              required: true,
-            }}
-            InputProps={{
-              style: textFieldStyle,
-            }}
-          />
           <PasswordField 
             name="password"
             placeholder="Password"
+            rules={{ required: true }}
+            InputProps={{ style: textFieldStyle }}
+            iconButtonStyle={iconButtonStyle}
+            {...visibilityPasswordIcons}
+          />
+          <PasswordField 
+            name="newPassword"
+            placeholder="New Password"
+            rules={{ required: true }}
+            InputProps={{ style: textFieldStyle }}
+            iconButtonStyle={iconButtonStyle}
+            {...visibilityPasswordIcons}
+          />
+          <PasswordField 
+            name="confirmNewPassword"
+            placeholder="Confirm New Password"
             rules={{ required: true }}
             InputProps={{ style: textFieldStyle }}
             iconButtonStyle={iconButtonStyle}
@@ -114,4 +118,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default ForgotPasswordForm;

@@ -32,7 +32,7 @@ const visibilityPasswordIcons = {
   offIcon: <VisibilityOffOutlinedIcon sx={{ fontSize: 16 }}/>
 }
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const {
     loginUser,
     queryResult: { 
@@ -45,7 +45,6 @@ const LoginForm = () => {
 
   const { 
     handleSubmit,  
-    resetField,
     formState: {
       isValid
     }
@@ -58,9 +57,6 @@ const LoginForm = () => {
       navigate("/users");
     } catch (e) {
       console.error(e);
-    }
-    finally {
-      resetField({})
     }
   };
 
@@ -76,11 +72,36 @@ const LoginForm = () => {
               {error?.message}
             </FormHelperText>
           )}
+          <Stack spacing={1} direction='row'>
+            <TextField
+                size="small"
+                name="firstName"
+                fullWidth
+                placeholder="First Name"
+                rules={{
+                required: true,
+                }}
+                InputProps={{
+                style: textFieldStyle,
+                }}
+            />
+            <TextField
+                size="small"
+                name="lastName"
+                fullWidth
+                placeholder="Last Name"
+                rules={{
+                required: true,
+                }}
+                InputProps={{
+                style: textFieldStyle,
+                }}
+            />
+          </Stack>
           <TextField
             size="small"
             name="email"
-            placeholder="Enter email address"
-            autoComplete="current-email"
+            placeholder="Email Address"
             rules={{
               required: true,
             }}
@@ -88,7 +109,7 @@ const LoginForm = () => {
               style: textFieldStyle,
             }}
           />
-          <PasswordField 
+         <PasswordField 
             name="password"
             placeholder="Password"
             rules={{ required: true }}
@@ -114,4 +135,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default RegisterForm;

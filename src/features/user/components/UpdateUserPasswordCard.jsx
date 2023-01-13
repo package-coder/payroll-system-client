@@ -7,7 +7,7 @@ import { Controller, FormProvider, useForm } from "react-hook-form";
 import TableGrid from "../../../components/TableGrid";
 import _ from 'lodash'
 import { useRef } from "react";
-import PasswordField from "./PasswordField";
+import PasswordField from "../../../components/PasswordField";
 
 const columns = [
   {  id: 'label' },

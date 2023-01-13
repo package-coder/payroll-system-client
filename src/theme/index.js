@@ -62,8 +62,18 @@ theme = {
                 }
             }
         },
+        MuiInputBase: {
+            styleOverrides: {
+                input: {
+                    height: '3rem',
+                }
+            }
+        },
         MuiOutlinedInput: {
             styleOverrides: {
+                input: {
+                    padding: '0 20px'
+                },
                 root: {
                     '&:hover': {
                         '& .MuiOutlinedInput-notchedOutline': {
@@ -98,7 +108,7 @@ theme = {
                         borderColor: 'transparent',
                         borderStyle: 'solid'
                     },
-                    backgroundColor: theme.palette.secondary.light
+                    backgroundColor: theme.palette.secondary.light,
                 }
             }
         },
@@ -113,11 +123,19 @@ theme = {
             styleOverrides: {
                 root: {
                     textTransform: 'none',
+                    height: '3rem',
+                    fontWeight: 600,
                 },
                 contained: {
                     boxShadow: 'none',
                     '&:active': {
                         boxShadow: 'none',
+                    },
+                    '&.Mui-disabled': {
+                        cursor: 'not-allowed',
+                        opacity: '0.4', 
+                        color: 'unset',
+                        backgroundColor: theme.palette.primary.main
                     },
                 },
             },
@@ -326,6 +344,13 @@ theme = {
             styleOverrides: {
                 grouped: {
                     minWidth: '30px'
+                }
+            }
+        },
+        MuiContainer: {
+            styleOverrides: {
+                maxWidthXs: {
+                    maxWidth: '472px'
                 }
             }
         }
