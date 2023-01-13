@@ -43,7 +43,6 @@ const EmploymentTypeTable = () => {
           loading,
           error,
           refetch,
-          networkStatus
         }
     } = useGetEmploymentTypes()
 

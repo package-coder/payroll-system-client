@@ -16,11 +16,6 @@ import useCreatePosition from '../hooks/useCreatePosition';
 
 const columns = [
   {
-    id: 'action',
-    padding: 'checkbox',
-    align: 'center',
-  },
-  {
     id: "",
     render: (_, row) => (
       <Stack direction='row' spacing={2} alignItems='center'>
@@ -29,12 +24,11 @@ const columns = [
       </Stack>
     )
   },
-  // {
-  //   id: '',
-  //   render: () => (
-
-  //   )
-  // }
+  {
+    id: 'action',
+    padding: 'checkbox',
+    align: 'right',
+  },
 ];
 
 const addActionColumnInPositions = (positions) => {
@@ -79,13 +73,12 @@ const PositionTable = () => {
   const [inputValue, setInputValue] = useState('')
 
     const { 
-        positions, 
-        queryResult: {
-          loading: fetchingPositions,
-          error,
-          refetch,
-          networkStatus
-        }
+      positions, 
+      queryResult: {
+        loading: fetchingPositions,
+        error,
+        refetch,
+      }
     } = useGetPositions()
 
     const handleSearchChange = (value) => {
@@ -113,7 +106,8 @@ const PositionTable = () => {
         <AddPositionButton 
           value={inputValue} 
           onSubmit={handleSubmit}
-        />}
+        />
+      }
     >
       <TableGrid
         disableHeader

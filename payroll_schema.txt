@@ -1,0 +1,91 @@
+Payroll System
+
+Authentication
+	> login
+	> logout
+	> forget password
+	> register
+
+User(SUPER_ADMIN)
+	> fields
+		- firstname
+		- lastname
+		- email
+		- password
+		- image
+		- role = [SUPER_ADMIN, ADMIN, EDITOR]
+		- enable
+	> table
+		- search
+		- filter
+		- view
+		- sort(default: createdAt)
+	> create
+		- manually
+		- accept register
+		- import file
+	> register
+	> update
+	> view individually
+	> enabler switch
+
+Position
+	> table
+		- view
+	> create
+		- manually
+	> update
+	> enabler switch
+
+Employment Types
+	> table
+		- view
+	> create
+		- manually
+	> update
+	> enabler switch
+
+Department
+	> table
+		- view
+	> create
+		- manually
+	> update
+	> enabler switch
+
+Job
+	> table
+		- search
+		- filter
+		- view
+		- sort(default: createdAt)
+	> create
+		- manually
+		- [multiple]
+	> update
+	> view individually
+	> enabler switch
+
+Employee
+	> table
+		- search
+		- filter
+		- view
+		- sort(default: createdAt)
+	> create
+		- manually
+		- accept register
+		- import file
+	> register
+	> update
+	> view individually
+	> enabler switch
+	> export
+
+Teams
+Attendance
+Allowance
+Deductions
+
+
+
