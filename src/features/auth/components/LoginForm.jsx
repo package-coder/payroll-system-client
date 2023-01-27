@@ -66,7 +66,11 @@ const LoginForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+      <form 
+        autoComplete="off"
+        noValidate 
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <Stack direction="column" spacing={1} sx={{ width: "100%" }}>
           {error?.message && (
             <FormHelperText 
@@ -92,7 +96,9 @@ const LoginForm = () => {
             name="password"
             placeholder="Password"
             rules={{ required: true }}
-            InputProps={{ style: textFieldStyle }}
+            InputProps={{ 
+              style: textFieldStyle,
+            }}
             iconButtonStyle={iconButtonStyle}
             {...visibilityPasswordIcons}
           />
@@ -105,6 +111,7 @@ const LoginForm = () => {
           sx={{
             mt: 2,
             fontWeight: 600,
+            height: '3rem'
           }}
         >
           {loading ? <CircularProgress size={24} /> : "Submit"}

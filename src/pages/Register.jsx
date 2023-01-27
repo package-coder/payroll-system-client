@@ -12,7 +12,7 @@ const RegisterPage = () => {
         textAlign='center'
         sx={{ mb: 2 }}
       >
-        Request an account
+        Register an account
       </Typography>
       <RegisterForm />
     </Box>

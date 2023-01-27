@@ -126,6 +126,7 @@ const RegisterForm = () => {
           sx={{
             mt: 2,
             fontWeight: 600,
+            height: '3rem'
           }}
         >
           {loading ? <CircularProgress size={24} /> : "Submit"}

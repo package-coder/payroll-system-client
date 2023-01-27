@@ -66,13 +66,14 @@ theme = {
             styleOverrides: {
                 input: {
                     height: '3rem',
+                    padding: '0 20px'
                 }
             }
         },
         MuiOutlinedInput: {
             styleOverrides: {
                 input: {
-                    padding: '0 20px'
+                    padding: '0 20px',
                 },
                 root: {
                     '&:hover': {
@@ -123,7 +124,6 @@ theme = {
             styleOverrides: {
                 root: {
                     textTransform: 'none',
-                    height: '3rem',
                     fontWeight: 600,
                 },
                 contained: {

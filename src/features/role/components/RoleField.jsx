@@ -13,8 +13,10 @@ const RoleField = (props) => {
         value={value}
         required={required}
         onBlur={onBlur}
-        sx={{ mt: 1 }}
-        id="role-select"
+        sx={{ 
+          mt: 1,
+          height: '3rem',
+        }}
         onChange={handleChange}
         input={<OutlinedInput />}
       >

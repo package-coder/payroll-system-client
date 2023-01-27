@@ -16,55 +16,55 @@ User(SUPER_ADMIN)
 		- role = [SUPER_ADMIN, ADMIN, EDITOR]
 		- enable
 	> table
-		- search
+		# search
 		- filter
-		- view
+		# view
 		- sort(default: createdAt)
 	> create
-		- manually
+		# manually
 		- accept register
 		- import file
 	> register
-	> update
-	> view individually
-	> enabler switch
+	# update
+	# view individually
+	# enabler switch
 
 Position
-	> table
+	# table
 		- view
-	> create
+	# create
 		- manually
 	> update
-	> enabler switch
+	# enabler switch
 
 Employment Types
-	> table
+	# table
 		- view
-	> create
+	# create
 		- manually
 	> update
-	> enabler switch
+	# enabler switch
 
 Department
-	> table
+	# table
 		- view
-	> create
+	# create
 		- manually
 	> update
-	> enabler switch
+	# enabler switch
 
 Job
-	> table
-		- search
+	# table
+		# search
 		- filter
-		- view
+		# view
 		- sort(default: createdAt)
 	> create
-		- manually
+		# manually
 		- [multiple]
 	> update
-	> view individually
-	> enabler switch
+	# view individually
+	# enabler switch
 
 Employee
 	> table
