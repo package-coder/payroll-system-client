@@ -19,8 +19,7 @@ const LoginPage = () => {
       <Typography
         variant="h5"
         fontWeight="bold"
-        textAlign='center'
-        sx={{ mb: 2 }}
+        sx={{ mb: 5 }}
       >
         Sign In
       </Typography>
@@ -47,7 +46,20 @@ const LoginPage = () => {
         }}
         onClick={() => navigate('/register')}
       >
-        Register an account
+        Request an account 
+      </Button>
+      <Button 
+        fullWidth 
+        variant='outlined'
+        sx={{ 
+          mt: 1,
+          color: 'grey', 
+          borderColor: 'gray',
+          height: '3rem'
+        }}
+        onClick={() => navigate('/forgot-password')}
+      >
+        Forgot Password
       </Button>
     </Box>
   );

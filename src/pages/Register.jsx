@@ -9,10 +9,9 @@ const RegisterPage = () => {
       <Typography
         variant="h5"
         fontWeight="bold"
-        textAlign='center'
-        sx={{ mb: 2 }}
+        sx={{ mb: 5 }}
       >
-        Register an account
+        Request an account
       </Typography>
       <RegisterForm />
     </Box>
