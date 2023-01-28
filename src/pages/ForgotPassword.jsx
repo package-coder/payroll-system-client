@@ -7,7 +7,6 @@ import VerifyEmailForm from '../features/auth/components/VerifyEmailForm';
 const ForgotPasswordPage = () => {
   const [searchParams] = useSearchParams();
 
-  console.log(searchParams)
   const token = searchParams.get('token')
 
   if(token) {
@@ -19,7 +18,7 @@ const ForgotPasswordPage = () => {
     >
       Forgot password
     </Typography>
-    <ForgotPasswordForm />
+    <ForgotPasswordForm accessToken={token} />
   </Box>
   }
 

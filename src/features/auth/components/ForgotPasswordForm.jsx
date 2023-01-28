@@ -1,22 +1,16 @@
 import React from "react";
 import {
   Typography,
-  FormControl,
-  InputLabel,
-  Box,
   Stack,
   Button,
-  Avatar,
-  CircularProgress,
   FormHelperText,
 } from "@mui/material";
-import useLogin from "../hooks/useLogin";
 import { FormProvider, useForm } from "react-hook-form";
-import TextField from "../../../components/TextField";
-import { useNavigate } from "react-router";
 import PasswordField from "../../../components/PasswordField";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import useChangeUserPassword from "../hooks/useChangeUserPassword";
+import { useNavigate } from "react-router";
 
 const textFieldStyle = {
   backgroundColor: "#212426",
@@ -32,33 +26,97 @@ const visibilityPasswordIcons = {
     offIcon: <VisibilityOffOutlinedIcon sx={{ fontSize: 16 }}/>
 }
 
-const ForgotPasswordForm = () => {
+const ForgotPasswordForm = (props) => {
+
+  const { accessToken } = props
+
   const {
-    loginUser,
+    changeUserPassword,
+    info,
     queryResult: { 
       loading,
       error
     },
-  } = useLogin();
-  const navigate = useNavigate();
-  const methods = useForm();
+  } = useChangeUserPassword();
+  const navigate = useNavigate()
 
+  const methods = useForm();
   const { 
     handleSubmit,  
     formState: {
-      isValid
+      isValid,
+      isSubmitted,
+      resetField,
     }
   } = methods;
 
   const onSubmit = async (data) => {
-    const { email, password } = data;
+    const { 
+      password, 
+      newPassword, 
+      confirmNewPassword 
+    } = data;
+
     try {
-      await loginUser(email, password);
-      navigate("/users");
+      await changeUserPassword(
+        accessToken, 
+        password,
+        newPassword,
+        confirmNewPassword
+      );
     } catch (e) {
       console.error(e);
     }
+    finally {
+      resetField({})
+    }
   };
+
+  if(info && isSubmitted && !error?.message) {
+    return (
+      <Button
+          fullWidth 
+          variant='outlined'
+          sx={{ 
+              color: 'grey', 
+              borderColor: 'gray',
+              py: 6,
+              position: 'relative'
+          }}
+          onClick={() => navigate('/login')}
+      >
+          <Typography
+              fontSize='16px'
+              color='white'
+          >
+              ✅ Change password successfully.
+          </Typography>
+      </Button>
+    )
+  } 
+
+  if(isSubmitted && error?.message.split('@')[0] === 'ACCESS_LINK_EXPIRED') {
+    return (
+      <Button
+          fullWidth 
+          variant='outlined'
+          sx={{ 
+              color: 'grey', 
+              borderColor: 'gray',
+              py: 6,
+              position: 'relative'
+          }}
+          onClick={() => navigate('/forgot-password')}
+      >
+          <Typography
+              fontSize='16px'
+              color='white'
+          >
+              🚫 Request change password link was expired.
+          </Typography>
+      </Button>
+    )
+  }
 
   return (
     <FormProvider {...methods}>
@@ -73,7 +131,7 @@ const ForgotPasswordForm = () => {
               sx={{ textAlign: 'center' }}
               error
             >
-              {error?.message}
+              {error?.message?.split('@')[1]}
             </FormHelperText>
           )}
           <PasswordField 
@@ -112,7 +170,7 @@ const ForgotPasswordForm = () => {
             height: '3rem'
           }}
         >
-          {loading ? <CircularProgress size={24} /> : "Submit"}
+          {loading ? "Loading..." : "Submit"}
         </Button>
       </form>
     </FormProvider>

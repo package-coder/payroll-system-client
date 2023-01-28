@@ -12,7 +12,7 @@ const REQUEST_QUERY = gql`
 const useRequestChangePassword = () => {
   const [mutate, { data, ...queryResult }] = useMutation(REQUEST_QUERY)
 
-  const request = async (email) => {
+  const requestChangePassword = async (email) => {
     const { data, ...rest } = await mutate({
       variables: {
         email,
@@ -29,7 +29,7 @@ const useRequestChangePassword = () => {
   const info = data?.requestChangePassword
 
   return {
-    request,
+    requestChangePassword,
     info,
     queryResult
   }
