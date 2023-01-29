@@ -11,7 +11,7 @@ const RegisterPage = () => {
         fontWeight="bold"
         sx={{ mb: 5 }}
       >
-        Request an account
+        Create Account
       </Typography>
       <RegisterForm />
     </Box>

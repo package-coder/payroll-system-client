@@ -77,7 +77,7 @@ const LoginForm = () => {
               sx={{ textAlign: 'center' }}
               error
             >
-              {error?.message?.split[1]}
+              {error?.message?.split('@')[1]}
             </FormHelperText>
           )}
           <TextField

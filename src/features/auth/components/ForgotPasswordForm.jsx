@@ -43,10 +43,10 @@ const ForgotPasswordForm = (props) => {
   const methods = useForm();
   const { 
     handleSubmit,  
+    resetField,
     formState: {
       isValid,
       isSubmitted,
-      resetField,
     }
   } = methods;
 
@@ -71,7 +71,7 @@ const ForgotPasswordForm = (props) => {
       resetField({})
     }
   };
-
+  
   if(info && isSubmitted && !error?.message) {
     return (
       <Button

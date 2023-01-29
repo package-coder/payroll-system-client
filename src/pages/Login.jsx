@@ -46,7 +46,7 @@ const LoginPage = () => {
         }}
         onClick={() => navigate('/register')}
       >
-        Request an account 
+        Create Account 
       </Button>
       <Button 
         fullWidth 

@@ -1,22 +1,18 @@
 import React from "react";
 import {
-  Typography,
-  FormControl,
-  InputLabel,
-  Box,
   Stack,
   Button,
-  Avatar,
   CircularProgress,
   FormHelperText,
+  Typography,
 } from "@mui/material";
-import useLogin from "../hooks/useLogin";
 import { FormProvider, useForm } from "react-hook-form";
 import TextField from "../../../components/TextField";
 import { useNavigate } from "react-router";
 import PasswordField from "../../../components/PasswordField";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import useCreateUser from "../../user/hooks/useCreateUser";
 
 const textFieldStyle = {
   backgroundColor: "#212426",
@@ -34,31 +30,108 @@ const visibilityPasswordIcons = {
 
 const RegisterForm = () => {
   const {
-    loginUser,
+    createUser,
     queryResult: { 
       loading,
       error
     },
-  } = useLogin();
+  } = useCreateUser();
   const navigate = useNavigate();
   const methods = useForm();
 
   const { 
     handleSubmit,  
+    resetField,
     formState: {
-      isValid
+      isValid,
+      isSubmitted
     }
   } = methods;
 
   const onSubmit = async (data) => {
-    const { email, password } = data;
     try {
-      await loginUser(email, password);
-      navigate("/users");
+      await createUser({
+        ...data,
+        verified: false
+      });
     } catch (e) {
       console.error(e);
     }
+    finally {
+      resetField({})
+    }
   };
+
+  if(isSubmitted && error?.message?.split('@')[0] == 'ITEM_ALREADY_EXISTS') {
+    return (
+      <div>
+        <Button
+          fullWidth 
+          variant='outlined'
+          sx={{ 
+            color: 'grey', 
+            borderColor: 'gray',
+            py: 6,
+            px: 4,
+            textAlign: 'center'
+          }}
+          onClick={() => navigate('/login')}
+        >
+          <Typography
+            fontSize='16px'
+            color='white'
+          >
+            👀 Account already exists.
+            <br />
+            Try resolve this by resetting 
+            <br/>
+            your password.
+          </Typography>
+        </Button>
+        <Button 
+          fullWidth 
+          variant='outlined'
+          sx={{ 
+            mt: 1,
+            color: 'grey', 
+            borderColor: 'gray',
+            height: '3rem'
+          }}
+          onClick={() => navigate('/forgot-password')}
+        >
+          Forgot Password
+        </Button>
+      </div>
+    )
+  }
+
+  if(isSubmitted) {
+    return (
+      <Button
+        fullWidth 
+        variant='outlined'
+        sx={{ 
+          color: 'grey', 
+          borderColor: 'gray',
+          py: 6,
+          px: 4,
+          textAlign: 'center'
+        }}
+        onClick={() => navigate('/login')}
+      >
+        <Typography
+          fontSize='16px'
+          color='white'
+        >
+          ✅ Created Successfully.
+          <br />
+          You will recieve an email when 
+          <br />
+          the admin approves.
+        </Typography>
+      </Button>
+    )
+  } 
 
   return (
     <FormProvider {...methods}>
@@ -69,33 +142,33 @@ const RegisterForm = () => {
               sx={{ textAlign: 'center' }}
               error
             >
-              {error?.message}
+              {error?.message?.split('@')[1]}
             </FormHelperText>
           )}
           <Stack spacing={1} direction='row'>
             <TextField
-                size="small"
-                name="firstName"
-                fullWidth
-                placeholder="First Name"
-                rules={{
+              size="small"
+              name="firstName"
+              fullWidth
+              placeholder="First Name"
+              rules={{
                 required: true,
-                }}
-                InputProps={{
+              }}
+              InputProps={{
                 style: textFieldStyle,
-                }}
+              }}
             />
             <TextField
-                size="small"
-                name="lastName"
-                fullWidth
-                placeholder="Last Name"
-                rules={{
+              size="small"
+              name="lastName"
+              fullWidth
+              placeholder="Last Name"
+              rules={{
                 required: true,
-                }}
-                InputProps={{
+              }}
+              InputProps={{
                 style: textFieldStyle,
-                }}
+              }}
             />
           </Stack>
           <TextField
